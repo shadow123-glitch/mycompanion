@@ -1,0 +1,124 @@
+﻿```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyCompanion India</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-white text-gray-800">
+
+<!-- NAVBAR -->
+<header class="flex justify-between items-center px-6 py-4 bg-white shadow-md">
+  <h1 class="text-xl font-semibold text-green-700">MyCompanion India</h1>
+  <button onclick="scrollToForm()" class="bg-green-700 text-white px-4 py-2 rounded">
+    Book Now
+  </button>
+</header>
+
+<!-- HERO WITH REAL BACKGROUND -->
+<section class="h-[80vh] flex items-center justify-center bg-cover bg-center"
+style="background-image:url('https://images.unsplash.com/photo-1584515933487-779824d29309');">
+
+  <div class="bg-black/50 p-8 rounded text-center max-w-xl">
+    <h2 class="text-3xl font-semibold text-white mb-4">
+      Care and Companionship for Seniors
+    </h2>
+    <p class="text-gray-200 mb-6">
+      We send trusted companions to spend time, support, and care for your loved ones at home.
+    </p>
+    <button onclick="scrollToForm()" class="bg-green-600 text-white px-6 py-2 rounded">
+      Book a Companion
+    </button>
+  </div>
+
+</section>
+
+<!-- BOOKING FORM -->
+<section id="form" class="py-16 flex justify-center">
+  <div class="w-full max-w-lg border p-6 rounded-lg shadow-sm">
+    
+    <h3 class="text-xl font-semibold mb-6 text-center">
+      Book a Companion
+    </h3>
+
+    <form onsubmit="sendData(event)" class="space-y-4">
+
+      <input id="name" placeholder="Your Name" required class="w-full p-2 border rounded"/>
+      <input id="phone" placeholder="Phone Number" required class="w-full p-2 border rounded"/>
+      <input id="senior" placeholder="Senior Name" required class="w-full p-2 border rounded"/>
+      <input id="address" placeholder="Full Address" required class="w-full p-2 border rounded"/>
+      <input id="city" placeholder="City" required class="w-full p-2 border rounded"/>
+
+      <select id="type" class="w-full p-2 border rounded">
+        <option value="">Select Companion Type</option>
+        <option>Male</option>
+        <option>Female</option>
+      </select>
+
+      <input id="hours" type="number" placeholder="Hours per Day" required class="w-full p-2 border rounded"/>
+      <input id="days" type="number" placeholder="Number of Days" required class="w-full p-2 border rounded"/>
+      <input id="start" type="date" required class="w-full p-2 border rounded"/>
+      <input id="time" type="time" required class="w-full p-2 border rounded"/>
+
+      <textarea id="notes" placeholder="Special Requirements (optional)" class="w-full p-2 border rounded"></textarea>
+
+      <button class="w-full bg-green-700 text-white py-2 rounded">
+        Submit Booking
+      </button>
+
+    </form>
+
+    <p id="msg" class="text-center text-green-600 mt-3"></p>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-white text-center py-4">
+  <p>+91 9356038466</p>
+  <p>MyCompanion India</p>
+</footer>
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbzlbiVGTFCFi34vMCNHXpCh7EI_OIGMs9dLFEqYmgHZRpuE3SjYFeOnhLu72cH7rTjz/exec";
+
+function scrollToForm(){
+  document.getElementById('form').scrollIntoView({behavior:'smooth'});
+}
+
+function sendData(e){
+  e.preventDefault();
+
+  const data = {
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    senior: document.getElementById("senior").value,
+    address: document.getElementById("address").value,
+    city: document.getElementById("city").value,
+    type: document.getElementById("type").value,
+    hours: document.getElementById("hours").value,
+    days: document.getElementById("days").value,
+    start: document.getElementById("start").value,
+    time: document.getElementById("time").value,
+    notes: document.getElementById("notes").value
+  };
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    document.getElementById("msg").innerText = "Booking submitted successfully";
+  })
+  .catch(() => {
+    document.getElementById("msg").innerText = "Error submitting booking";
+  });
+}
+</script>
+
+</body>
+</html>
+```
